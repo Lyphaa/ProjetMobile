@@ -27,7 +27,7 @@ public class List_adapter extends RecyclerView.Adapter<List_adapter.ViewHolder> 
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
 
-            txtHeader.setText("Festival");
+            txtHeader.setText("Titre");
         }
     }
 
