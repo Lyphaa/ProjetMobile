@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private static final String BASE_URL = "https://pokeapi.co/";
+    private static final String BASE_URL = "https://raw.githubusercontent.com/Lyphaa/Application_1/blob/master/";
     private void makeApiCall(){
         Gson gson = new GsonBuilder()
                 .setLenient()
