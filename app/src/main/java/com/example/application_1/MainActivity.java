@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private static final String BASE_URL = "https://raw.githubusercontent.com/Lyphaa/Application_1/blob/master/";
-    private void makeApiCall(){
+    private static final String BASE_URL = "https://pokeapi.co/";
+    private void makeApiCall() {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -68,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
         PokeApi pokeApi = retrofit.create(PokeApi.class);
 
-        Call<RestPokemonResponse> call = pokeApi.getPokemonResponse();
+       /* Call<RestPokemonResponse> call = pokeApi.getPokemonResponse();
+
         call.enqueue(new Callback<RestPokemonResponse>() {
             @Override
             public void onResponse(Call<RestPokemonResponse> call, Response<RestPokemonResponse> response) {
@@ -87,7 +88,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    */
+        Call<RegionPkmnResponse> call = pokeApi.getRegionResponse();
+        call.enqueue(new Callback<RegionPkmnResponse>() {
+            @Override
+            public void onResponse(Call<RegionPkmnResponse> call, Response<RegionPkmnResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<RegionPkmn> RegionList = response.body().getResult();
+                } else {
+                    showError();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<RegionPkmnResponse> call, Throwable t) {
+                showError();
+            }
+        });
+
+    }
     private void showError() {
         Toast.makeText(getApplicationContext(), "API ERROR", Toast.LENGTH_SHORT).show();
     }
