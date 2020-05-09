@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class List_adapter extends RecyclerView.Adapter<List_adapter.ViewHolder> {
-    private List<String> values;
+    private List<ApiPerso> values;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -31,7 +31,7 @@ public class List_adapter extends RecyclerView.Adapter<List_adapter.ViewHolder> 
         }
     }
 
-    public void add(int position, String item) {
+    public void add(int position, ApiPerso item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
@@ -42,7 +42,7 @@ public class List_adapter extends RecyclerView.Adapter<List_adapter.ViewHolder> 
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public List_adapter(List<String> myDataset) {
+    public List_adapter(List<ApiPerso> myDataset) {
         values = myDataset;
     }
 
@@ -66,16 +66,17 @@ public class List_adapter extends RecyclerView.Adapter<List_adapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final String name = values.get(position);
-        holder.txtHeader.setText(name);
-        holder.txtHeader.setOnClickListener(new View.OnClickListener() {
+        final ApiPerso currentSoiree = values.get(position);
+        holder.txtHeader.setText(currentSoiree.getName());
+        holder.txtFooter.setText(currentSoiree.getUrl());
+        /*holder.txtHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 remove(position);
             }
         });
+*/
 
-        holder.txtFooter.setText("Footer: " + name);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

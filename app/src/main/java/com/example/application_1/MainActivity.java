@@ -30,11 +30,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        showList();
         makeApiCall();
     }
 
-    private void showList() {
+    private void showList(List<ApiPerso> SoireeList ) {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         // use this setting to
         // improve performance if you know that changes
@@ -45,17 +44,20 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        List<String> input = new ArrayList<>();
+       /* création fausse liste
+       List<String> input = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             input.add("Nom " + i);
         }
+        */
+
         // define an adapter
-        mAdapter = new List_adapter(input);
+        mAdapter = new List_adapter(SoireeList);
         recyclerView.setAdapter(mAdapter);
     }
 
 
-    private static final String BASE_URL = "https://pokeapi.co/";
+    private static final String BASE_URL = "https://raw.githubusercontent.com/Lyphaa/Application_1/master/";
     private void makeApiCall() {
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -66,35 +68,36 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        PokeApi pokeApi = retrofit.create(PokeApi.class);
+        SoireeApi soireeApi = retrofit.create(SoireeApi.class);
 
-       /* Call<RestPokemonResponse> call = pokeApi.getPokemonResponse();
+       Call<RestApiPersoResponse> call = soireeApi.getSoireeResponse () ;
 
-        call.enqueue(new Callback<RestPokemonResponse>() {
+        call.enqueue(new Callback<RestApiPersoResponse>() {
             @Override
-            public void onResponse(Call<RestPokemonResponse> call, Response<RestPokemonResponse> response) {
+            public void onResponse(Call<RestApiPersoResponse> call, Response<RestApiPersoResponse> response) {
                 if(response.isSuccessful() && response.body() != null){
-                    List<Pokemon> pokemonList = response.body().getResult();
+                    List<ApiPerso> SoireeList = response.body().getResult();
+                    showList(SoireeList);
                 }else {
                     showError();
                 }
             }
 
             @Override
-            public void onFailure(Call<RestPokemonResponse> call, Throwable t) {
+            public void onFailure(Call<RestApiPersoResponse> call, Throwable t) {
                 showError();
         
             }
         });
 
     }
-    */
-        Call<RegionPkmnResponse> call = pokeApi.getRegionResponse();
+       /* Call<RegionPkmnResponse> call = pokeApi.getRegionResponse();
         call.enqueue(new Callback<RegionPkmnResponse>() {
             @Override
             public void onResponse(Call<RegionPkmnResponse> call, Response<RegionPkmnResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<RegionPkmn> RegionList = response.body().getResult();
+                    showList(RegionList);
                 } else {
                     showError();
                 }
@@ -106,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
     private void showError() {
         Toast.makeText(getApplicationContext(), "API ERROR", Toast.LENGTH_SHORT).show();
     }
