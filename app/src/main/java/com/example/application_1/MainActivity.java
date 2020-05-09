@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -24,11 +26,18 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List_adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private SharedPreferences sharedPreferences ;
+    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sharedPreferences  = getSharedPreferences("Appli_projet", Context.MODE_PRIVATE);
+        gson = new GsonBuilder()
+                .setLenient()
+                .create();
 
         makeApiCall();
     }
@@ -59,9 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String BASE_URL = "https://raw.githubusercontent.com/Lyphaa/Application_1/master/";
     private void makeApiCall() {
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -78,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 if(response.isSuccessful() && response.body() != null){
                     List<ApiPerso> SoireeList = response.body().getResult();
                     showList(SoireeList);
+                    saveList(SoireeList);
                 }else {
                     showError();
                 }
@@ -91,25 +98,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-       /* Call<RegionPkmnResponse> call = pokeApi.getRegionResponse();
-        call.enqueue(new Callback<RegionPkmnResponse>() {
-            @Override
-            public void onResponse(Call<RegionPkmnResponse> call, Response<RegionPkmnResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<RegionPkmn> RegionList = response.body().getResult();
-                    showList(RegionList);
-                } else {
-                    showError();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<RegionPkmnResponse> call, Throwable t) {
-                showError();
-            }
-        });
+    private void saveList(List<ApiPerso> soireeList) {
+        String jsonString = gson.toJson(soireeList);
+        sharedPreferences
+                .edit()
+                .putString("jsobSoireeList", "jsonString")
+                .apply();
+    }
 
-    }*/
     private void showError() {
         Toast.makeText(getApplicationContext(), "API ERROR", Toast.LENGTH_SHORT).show();
     }
