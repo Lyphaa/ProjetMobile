@@ -7,4 +7,5 @@ public interface SoireeApi {
 
         @GET("ApiPerso.json")
         Call<RestApiPersoResponse> getSoireeResponse () ;
+        //
 }

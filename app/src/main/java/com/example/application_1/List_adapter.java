@@ -86,3 +86,4 @@ public class List_adapter extends RecyclerView.Adapter<List_adapter.ViewHolder> 
     }
 
 }
+/**/
