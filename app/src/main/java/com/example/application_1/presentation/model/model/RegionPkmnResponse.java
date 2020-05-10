@@ -1,6 +1,4 @@
-package com.example.application_1;
-
-import android.graphics.Region;
+package com.example.application_1.presentation.model.model;
 
 import java.util.List;
 

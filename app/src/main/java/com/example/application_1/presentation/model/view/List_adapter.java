@@ -1,4 +1,4 @@
-package com.example.application_1;
+package com.example.application_1.presentation.model.view;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.application_1.R;
+import com.example.application_1.presentation.model.model.Pokemon;
 
 import java.util.List;
 
@@ -79,9 +82,9 @@ public class List_adapter extends RecyclerView.Adapter<List_adapter.ViewHolder> 
 
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
+
         return values.size();
     }
 

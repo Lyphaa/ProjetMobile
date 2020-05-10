@@ -1,8 +1,10 @@
-package com.example.application_1;
+package com.example.application_1.data;
+
+import com.example.application_1.presentation.model.model.RegionPkmnResponse;
+import com.example.application_1.presentation.model.model.RestPokemonResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 public interface PokeApi {
   @GET("/api/v2/region")

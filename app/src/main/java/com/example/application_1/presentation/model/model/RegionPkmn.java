@@ -1,4 +1,4 @@
-package com.example.application_1;
+package com.example.application_1.presentation.model.model;
 
 public class RegionPkmn {
 
