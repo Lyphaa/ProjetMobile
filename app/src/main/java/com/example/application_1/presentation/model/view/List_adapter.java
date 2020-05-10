@@ -13,11 +13,16 @@ import com.example.application_1.presentation.model.model.Pokemon;
 import java.util.List;
 
 public class List_adapter extends RecyclerView.Adapter<List_adapter.ViewHolder> {
-    private List<Pokemon> values;
+    private final List<Pokemon> values;
+    private final OnItemClickListener listener;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
+    public interface OnItemClickListener{
+        void onItemClick(Pokemon item);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         TextView txtHeader;
@@ -44,10 +49,11 @@ public class List_adapter extends RecyclerView.Adapter<List_adapter.ViewHolder> 
         notifyItemRemoved(position);
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public List_adapter(List<Pokemon> myDataset) {
+    // constructeur
+    public List_adapter(List<Pokemon> myDataset, OnItemClickListener listener) {
 
-        values = myDataset;
+        this.values = myDataset;
+        this.listener = listener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -79,6 +85,11 @@ public class List_adapter extends RecyclerView.Adapter<List_adapter.ViewHolder> 
                 remove(position);
             }
         });*/
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override public void onClick(View v){
+                listener.onItemClick(currentPokemon);
+            }
+        });
 
     }
 

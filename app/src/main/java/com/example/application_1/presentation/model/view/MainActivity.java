@@ -4,29 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.application_1.Constants;
 import com.example.application_1.R;
-import com.example.application_1.data.PokeApi;
+import com.example.application_1.Injection;
 import com.example.application_1.presentation.model.controller.MainController;
 import com.example.application_1.presentation.model.model.Pokemon;
-import com.example.application_1.presentation.model.model.RestPokemonResponse;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,28 +21,19 @@ public class MainActivity extends AppCompatActivity {
     private List_adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private MainController controller;
+    private MainController controller = new MainController(
+            this,
+            Injection.getGson(),
+            Injection.getSharedPreferences(getApplicationContext())
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        controller = new MainController(
-                this,
-                new GsonBuilder()
-                        .setLenient()
-                        .create(),
-                getSharedPreferences("projet_mobile", Context.MODE_PRIVATE)
-        );
-
         controller.onStart();
-
-
     }
-
-
 
     public void showList(List<Pokemon> pokemonList) {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -73,12 +51,24 @@ public class MainActivity extends AppCompatActivity {
             input.add("Nom " + i);
         }*/
         // define an adapter
-        mAdapter = new List_adapter(pokemonList);
+        mAdapter = new List_adapter(pokemonList, new List_adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Pokemon item) {
+                controller.onItemClick(item);
+            }
+        });
         recyclerView.setAdapter(mAdapter);
     }
 
     public void showError() {
         Toast.makeText(getApplicationContext(), "API ERROR", Toast.LENGTH_SHORT).show();
 
+    }
+
+    public void navigateToDetails(Pokemon pokemon) {
+        Intent myIntent = new Intent(MainActivity.this, SecondActivity.class);
+        myIntent.putExtra("pokemonKey", Injection.getGson().toJson(pokemon));
+        //myIntent.putExtra("pokemonKeyUrl", pokemon.getUrl());
+        MainActivity.this.startActivity(myIntent);
     }
 }
