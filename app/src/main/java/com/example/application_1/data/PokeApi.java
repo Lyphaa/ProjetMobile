@@ -7,11 +7,11 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface PokeApi {
-  @GET("/api/v2/region")
+ /* @GET("/api/v2/region")
     Call<RegionPkmnResponse> getRegionResponse () ;
     /*@Query("cle") String valeur*/
 
-    @GET("/api/v2/pokemon")
+    @GET("/api/v2/region")
     Call<RestPokemonResponse> getPokemonResponse () ;
 
 //"https://pokeapi.co/api/v2/"
