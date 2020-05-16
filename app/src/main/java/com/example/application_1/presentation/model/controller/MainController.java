@@ -70,7 +70,7 @@ public class MainController {
                 .edit()
                 .putString(Constants.KEY_POKEMON_LIST, jsonString)
                 .apply();
-            }
+    }
 
     private List<Pokemon> getDatafromCache() {
         String jsonPokemon = sharedPreferences.getString(Constants.KEY_POKEMON_LIST, null);
