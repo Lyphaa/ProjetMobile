@@ -8,14 +8,16 @@ Cette application utilise l'APIRest pokemon, plus précisemment les régions (ht
 
 ## Consigne 
 - Appel REST
-- 2 écrans minimum  : écran avec une liste et u nécran avec le detail des objets
+- 2 écrans minimum  : écran avec une liste et un écran avec le detail des objets
 - Stockage de donnée en cache
 
 ## Fonctionnalité 
-
 - affiche les différentes régions de l'univers de pokemon et permet d'avoir des details en cliquant dessus
 
-###Prérequis
+##Erreurs rencontrés
+Impossible de simuler l'application (sur le simulateur intégré ou bien sur mon propre telephone)
+
+##Prérequis
 Avoir Android Studio d'installé
 Récupérer le dossier du projet sur Github : https://github.com/Lyphaa/ProjetMobile
 
