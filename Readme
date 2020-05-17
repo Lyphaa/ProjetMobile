@@ -14,9 +14,6 @@ Cette application utilise l'APIRest pokemon, plus précisemment les régions (ht
 ## Fonctionnalité 
 - affiche les différentes régions de l'univers de pokemon et permet d'avoir des details en cliquant dessus
 
-##Erreurs rencontrés
-Impossible de simuler l'application (sur le simulateur intégré ou bien sur mon propre telephone)
-
 ##Prérequis
 Avoir Android Studio d'installé
 Récupérer le dossier du projet sur Github : https://github.com/Lyphaa/ProjetMobile
@@ -26,3 +23,5 @@ Récupérer le dossier du projet sur Github : https://github.com/Lyphaa/ProjetMo
 - Refonte visuel de l'application
 
 
+##Erreurs rencontrés
+Impossible de simuler l'application (sur le simulateur intégré ou bien sur mon propre telephone)
