@@ -12,7 +12,11 @@ Cette application utilise l'APIRest pokemon, plus précisemment les régions (ht
 - Stockage de donnée en cache
 
 ## Fonctionnalité 
+- Appel de l'APIrest PokemonRegion : https://pokeapi.co/docs/v2.html#regions
 - affiche les différentes régions de l'univers de pokemon et permet d'avoir des details en cliquant dessus
+- un écran contenant la liste de ces régions, un écran affichant donc le détail
+- Stockage des donnée en cache, avec vérification de la connection internet
+- Architecture MVC
 
 ##Prérequis
 Avoir Android Studio d'installé
@@ -25,3 +29,5 @@ Récupérer le dossier du projet sur Github : https://github.com/Lyphaa/ProjetMo
 
 ##Erreurs rencontrés
 Impossible de simuler l'application (sur le simulateur intégré ou bien sur mon propre telephone)
+
+https://github.com/Lyphaa/ProjetMobile/blob/master/Image/Screenshot_2.png
